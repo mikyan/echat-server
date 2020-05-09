@@ -53,7 +53,7 @@ import io.netty.bootstrap.ServerBootstrap;
 @SpringBootApplication
 
 //扫描组件，会把cn.mikyan.*包里的component加入到spring 容器里管理
-@ComponentScan(basePackages= {"cn.mikyan"})
+@ComponentScan(basePackages= {"cn.mikyan","org.n3r.idworker"})
 public class Application {
 
 	public static void main(String[] args) {
