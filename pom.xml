@@ -63,12 +63,43 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>1.3.2</version>
+   			<groupId>commons-io</groupId>
+   			<artifactId>commons-io</artifactId>
+  			<version>2.4</version>
 		</dependency>
 
 
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<!-- <version>5.1.41</version> -->
+			<version>8.0.15</version>
+		</dependency>
+
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<!--mapper -->
+		<dependency>
+   			<groupId>tk.mybatis</groupId>
+   			<artifactId>mapper</artifactId>
+  			<version>4.1.5</version>
+		</dependency>
+
+		<dependency>
+   			 <groupId>tk.mybatis</groupId>
+   			 <artifactId>mapper-spring-boot-starter</artifactId>
+   		 	<version>2.1.3</version>
+		</dependency>
+		<!--pagehelper -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.10</version>
+		</dependency>
 
 		<!-- 高性能分布式文件服务器 -->
 		<dependency>

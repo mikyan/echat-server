@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mikyan.mapper.GroupsMapper">
+  <resultMap id="BaseResultMap" type="cn.mikyan.pojo.Groups">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="groupname" jdbcType="VARCHAR" property="groupname" />
+    <result column="faceimage" jdbcType="VARCHAR" property="faceimage" />
+    <result column="faceimage_big" jdbcType="VARCHAR" property="faceimageBig" />
+    <result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
+  </resultMap>
+</mapper>
