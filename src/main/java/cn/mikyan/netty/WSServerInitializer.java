@@ -9,6 +9,12 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
 
+
+/**
+ * netty基于reactor模式
+ * 这里用到了很明显的pipeline模式
+ * 是一种将处理流程分开的模式，handler就是pipeline中的valve
+ */
 public class WSServerInitializer extends ChannelInitializer<SocketChannel>{
 	@Override
 	protected void initChannel(SocketChannel ch) throws Exception {

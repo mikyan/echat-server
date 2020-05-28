@@ -21,10 +21,27 @@ import cn.mikyan.service.UserService;
 // import cn.mikyan.utils.FileUtils;
 // import cn.mikyan.utils.IMoocJSONResult;
 // import cn.mikyan.utils.MD5Utils;
-
+import cn.mikyan.controller.MyAnnotation.*;
 
 @RestController
-@RequestMapping("u")
+@RequestMapping("v1/u")
+
 public class UserController {
     
+
+    /**
+     * 
+     * @param user
+     * @return
+     * @throws Exception
+     * 没啥用，就是试下自己写的登录拦截器
+     * 这是个统一登录的验证，只需要在需要登录的接口前
+     * 加上他就行了
+     * 这是一个基于注解驱动的拦截过滤器模式
+     */
+    @LoginRequired
+    @PostMapping("/test")
+	public String test(@RequestBody Users user) throws Exception {
+        return null;
+	}
 }
