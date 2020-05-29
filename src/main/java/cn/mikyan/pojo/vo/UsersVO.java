@@ -6,7 +6,9 @@ public class UsersVO {
     private String faceImage;
     private String faceImageBig;
     private String nickname;
-    private String qrcode;
+	private String qrcode;
+
+
     
 	public String getId() {
 		return id;
@@ -44,4 +46,5 @@ public class UsersVO {
 	public void setQrcode(String qrcode) {
 		this.qrcode = qrcode;
 	}
+
 }
