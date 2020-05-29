@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 import io.netty.bootstrap.ServerBootstrap;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * 在这里记点笔记，方便自己看也方便同组同学看
@@ -52,8 +53,9 @@ import io.netty.bootstrap.ServerBootstrap;
  */
 @SpringBootApplication
 
+@MapperScan(basePackages="com.imooc.mapper")
 //扫描组件，会把cn.mikyan.*包里的component加入到spring 容器里管理
-@ComponentScan(basePackages= {"cn.mikyan"})
+@ComponentScan(basePackages= {"cn.mikyan","org.n3r.idworker"})
 public class Application {
 
 	public static void main(String[] args) {
