@@ -13,7 +13,8 @@ public enum MsgActionEnum {
 	SIGNED(3, "消息签收"),
 	KEEPALIVE(4, "客户端保持心跳"),
     PULL_FRIEND(5, "拉取好友"),
-    Friend_Request(6,"发送好友请求");
+	Friend_Request(6,"发送好友请求"),
+	CHAT_IMAGE(7,"消息是图片");
 	
 	public final Integer type;
 	public final String content;
