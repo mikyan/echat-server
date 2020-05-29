@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<mikyan-echat>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "cn.mikyan.Application",
+            "projectName": "mikyan-echat",
+            "args": ""
+        }
+    ]
+}
