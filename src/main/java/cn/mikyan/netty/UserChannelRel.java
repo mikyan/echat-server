@@ -4,6 +4,9 @@ import java.util.HashMap;
 
 import io.netty.channel.Channel;
 
+/**
+ * @Description 负责管理用户channel和用户id的关系
+ */
 public class UserChannelRel {
     private static HashMap<String, Channel> manager = new HashMap<>();
 
