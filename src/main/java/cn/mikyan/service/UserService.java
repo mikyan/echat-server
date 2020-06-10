@@ -2,6 +2,7 @@ package cn.mikyan.service;
 
 import java.util.List;
 
+import cn.mikyan.netty.pojo.ChatMsg;
 import cn.mikyan.pojo.Users;
 import cn.mikyan.pojo.UsersChatMsg;
 import cn.mikyan.pojo.vo.FriendRequestVO;
@@ -70,7 +71,7 @@ public interface UserService {
 	/**
 	 * @Description: 保存聊天消息到数据库
 	 */
-	public String saveMsg(UsersChatMsg chatMsg);
+	public String saveMsg(ChatMsg chatMsg);
 	
 	/**
 	 * @Description: 批量签收消息

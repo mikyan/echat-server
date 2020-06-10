@@ -5,18 +5,18 @@ package cn.mikyan.enums;
  */
 public enum MsgSignFlagEnum {
     
-	UNSIGN(0, "未签收"),
-	SIGNED(1, "已签收");	
+	UNSIGN(false, "未签收"),
+	SIGNED(true, "已签收");	
 	
-	public final Integer type;
+	public final Boolean type;
 	public final String content;
 	
-	MsgSignFlagEnum(Integer type, String content){
+	MsgSignFlagEnum(Boolean type, String content){
 		this.type = type;
 		this.content = content;
 	}
 	
-	public Integer getType() {
+	public Boolean getType() {
 		return type;
 	}  
 }
