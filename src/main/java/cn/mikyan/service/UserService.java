@@ -1,6 +1,7 @@
 package cn.mikyan.service;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.mikyan.netty.pojo.ChatMsg;
 import cn.mikyan.pojo.Users;
@@ -72,6 +73,16 @@ public interface UserService {
 	 * @Description: 保存聊天消息到数据库
 	 */
 	public String saveMsg(ChatMsg chatMsg);
+
+
+	/**
+	 * 带有sid的保存信息
+	 * @param chatMsg
+	 * @return
+	 * @throws Exception
+	 */
+	public String saveImageMsg(ChatMsg chatMsg) throws Exception;
+
 	
 	/**
 	 * @Description: 批量签收消息
@@ -82,4 +93,5 @@ public interface UserService {
 	 * @Description: 获取未签收消息列表
 	 */
 	public List<UsersChatMsg> getUnReadMsgList(String acceptUserId);
+
 }

@@ -2,7 +2,9 @@ package cn.mikyan.service.impl;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -248,6 +250,7 @@ public class UserServiceImpL implements UserService {
 		cn.mikyan.pojo.UsersChatMsg msgDB = new cn.mikyan.pojo.UsersChatMsg();
 		String msgId = sid.nextShort();
 		msgDB.setId(msgId);
+		msgDB.setType(MsgActionEnum.CHAT.type);
 		msgDB.setAcceptUserId(chatMsg.getReceiverId());
 		msgDB.setSendUserId(chatMsg.getSenderId());
 		msgDB.setCreateTime(new Date());
@@ -258,6 +261,34 @@ public class UserServiceImpL implements UserService {
 		
 		return msgId;
 	}
+
+	//储存图片，但是感觉不太对
+	//效率确实低
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	@Override
+	public String saveImageMsg(ChatMsg chatMsg) throws Exception {
+		
+		
+		
+
+		cn.mikyan.pojo.UsersChatMsg msgDB = new cn.mikyan.pojo.UsersChatMsg();
+		String msgId = sid.nextShort();
+		msgDB.setId(msgId);
+		msgDB.setType(MsgActionEnum.CHAT_IMAGE.type);
+
+		msgDB.setAcceptUserId(chatMsg.getReceiverId());
+		msgDB.setSendUserId(chatMsg.getSenderId());
+		msgDB.setCreateTime(new Date());
+		msgDB.setSignFlag(MsgSignFlagEnum.UNSIGN.type);
+		msgDB.setMsg(chatMsg.getMsg());
+		
+		chatMsgMapper.insert(msgDB);
+		return msgId;
+	}
+
+
+
 
     @Transactional(propagation = Propagation.REQUIRED)
 	@Override
@@ -278,5 +309,6 @@ public class UserServiceImpL implements UserService {
 		
 		return result;
 	}
+
     
 }
