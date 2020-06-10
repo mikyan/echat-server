@@ -82,4 +82,10 @@ public interface UserService {
 	 * @Description: 获取未签收消息列表
 	 */
 	public List<UsersChatMsg> getUnReadMsgList(String acceptUserId);
+	
+	/**
+	 * @Description: 生成token
+	 */
+	public String getToken();
+	
 }

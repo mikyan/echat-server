@@ -37,7 +37,6 @@ public class ChatMsg implements Serializable {
 		this.msgId = msgId;
     }
     
-    
     public Integer getType() {
         return this.type;
     }

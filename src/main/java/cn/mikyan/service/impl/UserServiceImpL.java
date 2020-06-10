@@ -279,4 +279,9 @@ public class UserServiceImpL implements UserService {
 		return result;
 	}
     
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public String getToken() {
+    	return sid.nextShort();
+    }
+    
 }
