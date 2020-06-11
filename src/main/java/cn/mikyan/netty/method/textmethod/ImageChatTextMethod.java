@@ -52,7 +52,7 @@ public class ImageChatTextMethod implements TextMethod {
 
 		// 获取前端传过来的base64字符串, 然后转换为文件对象再上传
 		String base64Data = msgText;
-		String imagetempPath = "C:\\" + senderId + receiverId;
+		String imagetempPath = "D:\\image\\" + senderId + receiverId;
 
 		FileUtils.base64ToFile(imagetempPath, base64Data);
 		

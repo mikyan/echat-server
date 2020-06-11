@@ -7,7 +7,7 @@ public class UsersVO {
     private String faceImageBig;
     private String nickname;
 	private String qrcode;
-
+	private String token;
 
     
 	public String getId() {
@@ -45,6 +45,14 @@ public class UsersVO {
 	}
 	public void setQrcode(String qrcode) {
 		this.qrcode = qrcode;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

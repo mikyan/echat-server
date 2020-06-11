@@ -49,7 +49,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
 			throws Exception {
 		// 获取客户端传输过来的消息
 		String content = msg.text();
-		Channel currentChannel = ctx.channel();
+		
 		// 1. 获取客户端发来的消息
 		DataContent dataContent = JsonUtils.jsonToPojo(content, DataContent.class);
 		Integer action = dataContent.getAction();

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,8 @@ import cn.mikyan.utils.FileUtils;
 import cn.mikyan.controller.pojo.ResponseJSON;
 import cn.mikyan.utils.MD5Utils;
 import cn.mikyan.controller.MyAnnotation.*;
+import org.n3r.idworker.Sid;
+
 @RestController
 @RequestMapping("v1/u")
 
@@ -54,6 +57,11 @@ public class UserController {
 	@Autowired
 	private FastDFSClient fastDFSClient;
 
+	@Autowired
+	private Sid sid;
+
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
 	/**
 	 * @Description: 用户注册/登录
 	 */
@@ -68,6 +76,7 @@ public class UserController {
 		// 1. 判断用户名是否存在，如果存在就登录，如果不存在则注册
 		boolean usernameIsExist = userService.queryUsernameIsExist(user.getUsername());
 		Users userResult = null;
+		UsersVO userVO = new UsersVO();
 		if (usernameIsExist) {
 			// 1.1 登录
 			userResult = userService.queryUserForLogin(user.getUsername(), 
@@ -75,7 +84,14 @@ public class UserController {
 			if (userResult == null) {
 				return ResponseJSON.errorMsg("用户名或密码不正确..."); 
 			}
+			
+			//待添加在redis里添加的代码
+			String token=sid.nextShort();
+			stringRedisTemplate.opsForValue().set(user.getUsername(),token);
+			userVO.setToken(token);
 		} else {
+			String token=sid.nextShort();
+			stringRedisTemplate.opsForValue().set(user.getUsername(),token);
 			// 1.2 注册
 			user.setNickName(user.getUsername());
 			user.setFaceimage("");
@@ -84,18 +100,16 @@ public class UserController {
 			userResult = userService.saveUser(user);
 		}
 		
-		UsersVO userVO = new UsersVO();
 		BeanUtils.copyProperties(userResult, userVO);
-		
 		return ResponseJSON.ok(userVO);
-		// TODO 
+
 	}
 	
 	/**
 	 * @Description: 上传用户头像
 	 */
 	
-
+	
 	//测试用端口
 	@GetMapping("/uploadTest")
 	public ResponseJSON uploadFaceBase64() throws Exception {
@@ -130,6 +144,7 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
+	@LoginRequired
 	@PostMapping("/uploadFaceBase64")
 	public ResponseJSON uploadFaceBase64(@RequestBody UsersBO userBO) throws Exception {
 		// 获取前端传过来的base64字符串, 然后转换为文件对象再上传
@@ -165,6 +180,7 @@ public class UserController {
 	/**
 	 * @Description: 设置用户昵称
 	 */
+	@LoginRequired
 	@PostMapping("/setNickname")
 	public ResponseJSON setNickname(@RequestBody UsersBO userBO) throws Exception {
         
@@ -210,6 +226,7 @@ public class UserController {
 	/**
 	 * @Description: 发送添加好友的请求
 	 */
+	@LoginRequired
 	@PostMapping("/addFriendRequest")
 	public ResponseJSON addFriendRequest(String myUserId, String friendUsername)
 			throws Exception {
@@ -237,6 +254,7 @@ public class UserController {
 	/**
 	 * @Description: 查询添加好友的请求
 	 */
+	@LoginRequired
 	@PostMapping("/queryFriendRequests")
 	public ResponseJSON queryFriendRequests(String userId) {
 		
@@ -253,6 +271,7 @@ public class UserController {
 	/**
 	 * @Description: 接受方 通过或者忽略朋友请求
 	 */
+	@LoginRequired
 	@PostMapping("/operatorFriendRequest")
 	public ResponseJSON operatorFriendRequest(String acceptUserId, String sendUserId,
 												Integer operType) {
@@ -287,6 +306,7 @@ public class UserController {
 	/**
 	 * @Description: 查询我的好友列表
 	 */
+	@LoginRequired
 	@PostMapping("/myFriends")
 	public ResponseJSON myFriends(String userId) {
 		// 0. userId 判断不能为空
@@ -304,6 +324,7 @@ public class UserController {
 	 * 
 	 * @Description: 用户手机端获取未签收的消息列表
 	 */
+	@LoginRequired
 	@PostMapping("/getUnReadMsgList")
 	public ResponseJSON getUnReadMsgList(String acceptUserId) {
 		// 0. userId 判断不能为空

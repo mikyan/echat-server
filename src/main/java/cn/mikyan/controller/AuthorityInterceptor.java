@@ -27,7 +27,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
        if (methodAnnotation != null) {
 
         // TODO Auto-generated method stub
-           // 这写你拦截需要干的事儿，比如取缓存，SESSION，权限判断等
+        // 这写你拦截需要干的事儿，比如取缓存，SESSION，权限判断等
            System.out.println("====================================");
            return true;
        }

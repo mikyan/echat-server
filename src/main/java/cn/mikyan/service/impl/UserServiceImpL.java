@@ -97,7 +97,7 @@ public class UserServiceImpL implements UserService {
     	String userId = sid.nextShort();
 		
 		// 为每个用户生成一个唯一的二维码
-		String qrCodePath = "C://user" + userId + "qrcode.png";
+		String qrCodePath = "D://image//user" + userId + "qrcode.png";
 		
 		qrCodeUtils.createQRCode(qrCodePath, "echat_qrcode:" + user.getUsername());
 		MultipartFile qrCodeFile = FileUtils.fileToMultipart(qrCodePath);
