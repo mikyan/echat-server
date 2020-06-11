@@ -132,7 +132,7 @@ public class UserServiceImpL implements UserService {
     @Override
     public Integer preconditionSearchFriends(String myUserId, String friendUsername) {
     	Users user = queryUserInfoByUsername(friendUsername);
-		
+		System.out.println(friendUsername);
 		// 1. 搜索的用户如果不存在，返回[无此用户]
 		if (user == null) {
 			return SearchFriendsStatusEnum.NOT_EXIST.status;
@@ -239,6 +239,7 @@ public class UserServiceImpL implements UserService {
     @Transactional(propagation = Propagation.SUPPORTS)
 	@Override
 	public List<MyFriendsVO> queryMyFriends(String userId) {
+		
 		List<MyFriendsVO> myFirends = usersMapperCustom.queryMyFriends(userId);
 		return myFirends;
 	}

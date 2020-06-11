@@ -2,7 +2,9 @@ package cn.mikyan.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.RepaintManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -24,6 +26,7 @@ import cn.mikyan.pojo.vo.UsersVO;
 import cn.mikyan.service.UserService;
 import cn.mikyan.utils.FastDFSClient;
 import cn.mikyan.utils.FileUtils;
+import cn.mikyan.utils.JsonUtils;
 import cn.mikyan.controller.pojo.ResponseJSON;
 import cn.mikyan.utils.MD5Utils;
 import cn.mikyan.controller.MyAnnotation.*;
@@ -85,10 +88,7 @@ public class UserController {
 				return ResponseJSON.errorMsg("用户名或密码不正确..."); 
 			}
 			
-			//待添加在redis里添加的代码
-			String token=sid.nextShort();
-			stringRedisTemplate.opsForValue().set(user.getUsername(),token);
-			userVO.setToken(token);
+			
 		} else {
 			String token=sid.nextShort();
 			stringRedisTemplate.opsForValue().set(user.getUsername(),token);
@@ -99,7 +99,24 @@ public class UserController {
 			user.setPassword(MD5Utils.getMD5Str(user.getPassword()));
 			userResult = userService.saveUser(user);
 		}
-		
+		//待添加在redis里添加的代码
+		boolean hasKey = stringRedisTemplate.hasKey(user.getUsername());
+		String token="";
+		if(!hasKey){
+			token=sid.nextShort();
+			stringRedisTemplate.opsForValue().set(user.getUsername(),token);
+		}else{
+			token=stringRedisTemplate.opsForValue().get(user.getUsername());
+		}
+
+		Cookie cookie = new Cookie("token",token);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+
+		cookie = new Cookie("userName",user.getUsername());
+		cookie.setPath("/");
+		response.addCookie(cookie);
+
 		BeanUtils.copyProperties(userResult, userVO);
 		return ResponseJSON.ok(userVO);
 
@@ -149,7 +166,7 @@ public class UserController {
 	public ResponseJSON uploadFaceBase64(@RequestBody UsersBO userBO) throws Exception {
 		// 获取前端传过来的base64字符串, 然后转换为文件对象再上传
 		String base64Data = userBO.getFaceData();
-		String userFacePath = "C:\\" + userBO.getUserId() + "userface64.png";
+		String userFacePath = "D:\\image\\" + userBO.getUserId() + "userface64.png";
 		FileUtils.base64ToFile(userFacePath, base64Data);
 		
 		// 上传文件到fastdfs
@@ -316,7 +333,7 @@ public class UserController {
 		
 		// 1. 数据库查询好友列表
 		List<MyFriendsVO> myFirends = userService.queryMyFriends(userId);
-		
+		System.out.println(JsonUtils.objectToJson(myFirends));
 		return ResponseJSON.ok(myFirends);
 	}
 	
