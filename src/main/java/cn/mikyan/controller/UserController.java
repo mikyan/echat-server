@@ -3,6 +3,7 @@ package cn.mikyan.controller;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.RepaintManager;
 
@@ -109,11 +110,18 @@ public class UserController {
 			token=stringRedisTemplate.opsForValue().get(user.getUsername());
 		}
 
+		//保存token
 		Cookie cookie = new Cookie("token",token);
 		cookie.setPath("/");
 		response.addCookie(cookie);
 
+		//保存username
 		cookie = new Cookie("userName",user.getUsername());
+		cookie.setPath("/");
+		response.addCookie(cookie);
+
+		//保存userid
+		cookie = new Cookie("userId",user.getId());
 		cookie.setPath("/");
 		response.addCookie(cookie);
 
@@ -127,31 +135,6 @@ public class UserController {
 	 */
 	
 	
-	//测试用端口
-	@GetMapping("/uploadTest")
-	public ResponseJSON uploadFaceBase64() throws Exception {
-		// TODO
-		// 获取前端传过来的base64字符串, 然后转换为文件对象再上传
-		String userFacePath = "D:\\坚果云\\学习\\大三\\大三下\\软件设计模式-1\\大作业\\IM用例.png";
-
-		// 上传文件到fastdfs
-		MultipartFile faceFile = FileUtils.fileToMultipart(userFacePath);
-		String url = fastDFSClient.uploadBase64(faceFile);
-		System.out.println(url);
-		
-//		"dhawuidhwaiuh3u89u98432.png"
-//		"dhawuidhwaiuh3u89u98432_80x80.png"
-		
-		// 获取缩略图的url
-		String thump = "_80x80.";
-		String arr[] = url.split("\\.");
-		String thumpImgUrl = arr[0] + thump + arr[1];
-		
-		// 更新用户头像
-		
-		return ResponseJSON.ok(thumpImgUrl);
-
-	}
 	
 	/**
 	 * 同base64传输效率也太低了，您给这发邮件哪
@@ -163,7 +146,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/uploadFaceBase64")
-	public ResponseJSON uploadFaceBase64(@RequestBody UsersBO userBO) throws Exception {
+	public ResponseJSON uploadFaceBase64(HttpServletRequest request,@RequestBody UsersBO userBO) throws Exception {
 		// 获取前端传过来的base64字符串, 然后转换为文件对象再上传
 		String base64Data = userBO.getFaceData();
 		String userFacePath = "D:\\image\\" + userBO.getUserId() + "userface64.png";
@@ -199,7 +182,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/setNickname")
-	public ResponseJSON setNickname(@RequestBody UsersBO userBO) throws Exception {
+	public ResponseJSON setNickname(HttpServletRequest request,@RequestBody UsersBO userBO) throws Exception {
         
         Users user = new Users();
 		user.setId(userBO.getUserId());
@@ -245,7 +228,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/addFriendRequest")
-	public ResponseJSON addFriendRequest(String myUserId, String friendUsername)
+	public ResponseJSON addFriendRequest(HttpServletRequest request,String myUserId, String friendUsername)
 			throws Exception {
 		
 		// 0. 判断 myUserId friendUsername 不能为空
@@ -273,7 +256,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/queryFriendRequests")
-	public ResponseJSON queryFriendRequests(String userId) {
+	public ResponseJSON queryFriendRequests(HttpServletRequest request,String userId) {
 		
 		// 0. 判断不能为空
 		if (StringUtils.isBlank(userId)) {
@@ -290,7 +273,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/operatorFriendRequest")
-	public ResponseJSON operatorFriendRequest(String acceptUserId, String sendUserId,
+	public ResponseJSON operatorFriendRequest(HttpServletRequest request,String acceptUserId, String sendUserId,
 												Integer operType) {
 		
 		// 0. acceptUserId sendUserId operType 判断不能为空
@@ -325,7 +308,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/myFriends")
-	public ResponseJSON myFriends(String userId) {
+	public ResponseJSON myFriends(HttpServletRequest request,String userId) {
 		// 0. userId 判断不能为空
 		if (StringUtils.isBlank(userId)) {
 			return ResponseJSON.errorMsg("");
@@ -343,7 +326,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/getUnReadMsgList")
-	public ResponseJSON getUnReadMsgList(String acceptUserId) {
+	public ResponseJSON getUnReadMsgList(HttpServletRequest request,String acceptUserId) {
 		// 0. userId 判断不能为空
 		if (StringUtils.isBlank(acceptUserId)) {
 			return ResponseJSON.errorMsg("");

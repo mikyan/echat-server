@@ -53,7 +53,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
 		// 1. 获取客户端发来的消息
 		DataContent dataContent = JsonUtils.jsonToPojo(content, DataContent.class);
 		Integer action = dataContent.getAction();
-
+		UserService userService = (UserService) SpringUtil.getBean("userServiceImpL");
 		AbstractMethodFactory methodFactory = FactoryProducer.getFactory(DateTypeEnum.Text_Type.type);
 		TextMethod textMethod=methodFactory.getTextMethod(action);
 		textMethod.doOperation(ctx, msg);

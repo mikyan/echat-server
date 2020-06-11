@@ -63,7 +63,7 @@ public class ImageChatTextMethod implements TextMethod {
 		
         
 		// 保存消息到数据库，并且标记为 未签收
-        UserService userService = (UserService) SpringUtil.getBean("userServiceImpl");
+        UserService userService = (UserService) SpringUtil.getBean("userServiceImpL");
         String msgId = userService.saveImageMsg(chatMsg);
 
 		chatMsg.setMsgId(msgId);

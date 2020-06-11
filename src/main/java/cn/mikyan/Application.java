@@ -2,6 +2,7 @@ package cn.mikyan;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -58,6 +59,11 @@ import tk.mybatis.spring.annotation.MapperScan;
 @ComponentScan(basePackages= {"cn.mikyan","org.n3r.idworker"})
 public class Application {
 
+	@Bean
+	public SpringUtil getSpingUtil() {
+		return new SpringUtil();
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}

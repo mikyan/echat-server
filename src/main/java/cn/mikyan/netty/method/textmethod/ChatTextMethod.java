@@ -1,5 +1,8 @@
 package cn.mikyan.netty.method.textmethod;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import cn.mikyan.SpringUtil;
 import cn.mikyan.netty.ChatHandler;
 import io.netty.channel.Channel;
@@ -13,6 +16,7 @@ import cn.mikyan.utils.JsonUtils;
 
 
 public class ChatTextMethod implements TextMethod {
+
 
 	@Override
 	public void doOperation(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
@@ -33,7 +37,7 @@ public class ChatTextMethod implements TextMethod {
 		String senderId = chatMsg.getSenderId();
 
 		// 保存消息到数据库，并且标记为 未签收
-		UserService userService = (UserService) SpringUtil.getBean("userServiceImpl");
+		UserService userService = (UserService) SpringUtil.getBean("userServiceImpL");
 		String msgId = userService.saveMsg(chatMsg);
 		chatMsg.setMsgId(msgId);
 

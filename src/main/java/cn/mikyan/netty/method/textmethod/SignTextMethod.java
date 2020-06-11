@@ -29,7 +29,7 @@ public class SignTextMethod implements TextMethod {
 
 		// 2.3 签收消息类型，针对具体的消息进行签收，修改数据库中对应消息的签收状态[已签收]
 
-		UserService userService = (UserService) SpringUtil.getBean("userServiceImpl");
+		UserService userService = (UserService) SpringUtil.getBean("userServiceImpL");
 		// 扩展字段在signed类型的消息中，代表需要去签收的消息id，逗号间隔
 		String msgIdsStr = dataContent.getExtand();
 		String msgIds[] = msgIdsStr.split(",");
