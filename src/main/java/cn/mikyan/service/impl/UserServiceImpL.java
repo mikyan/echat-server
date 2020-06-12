@@ -109,7 +109,8 @@ public class UserServiceImpL implements UserService {
 			e.printStackTrace();
 		}
 		user.setQrcode(qrCodeUrl);
-		
+		user.setFaceimage(qrCodeUrl);
+		user.setFaceimageBig(qrCodeUrl);
 		user.setId(userId);
 		userMapper.insert(user);
 		
