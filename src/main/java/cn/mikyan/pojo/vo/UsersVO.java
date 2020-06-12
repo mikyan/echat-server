@@ -3,47 +3,58 @@ package cn.mikyan.pojo.vo;
 public class UsersVO {
     private String id;
     private String username;
-    private String faceImage;
-    private String faceImageBig;
-    private String nickname;
+    private String faceimage;
+    private String faceimageBig;
+    private String nickName;
 	private String qrcode;
 
-    
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getFaceImage() {
-		return faceImage;
+
+	public String getFaceimage() {
+		return faceimage;
 	}
-	public void setFaceImage(String faceImage) {
-		this.faceImage = faceImage;
+
+	public void setFaceimage(String faceimage) {
+		this.faceimage = faceimage;
 	}
-	public String getFaceImageBig() {
-		return faceImageBig;
+
+	public String getFaceimageBig() {
+		return faceimageBig;
 	}
-	public void setFaceImageBig(String faceImageBig) {
-		this.faceImageBig = faceImageBig;
+
+	public void setFaceimageBig(String faceimageBig) {
+		this.faceimageBig = faceimageBig;
 	}
-	public String getNickname() {
-		return nickname;
+
+	public String getNickName() {
+		return nickName;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
+
 	public String getQrcode() {
 		return qrcode;
 	}
+
 	public void setQrcode(String qrcode) {
 		this.qrcode = qrcode;
 	}
+
 
 }

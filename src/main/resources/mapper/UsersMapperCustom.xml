@@ -43,7 +43,7 @@
     <!-- 批处理更新消息为已签收 -->
     <update id="batchUpdateMsgSigned">
     
-        update chat_msg set sign_flag = 1 where id in
+        update users_chat_msg set sign_flag = 1 where id in
         <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>

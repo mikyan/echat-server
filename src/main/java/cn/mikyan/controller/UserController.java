@@ -83,8 +83,13 @@ public class UserController {
 		UsersVO userVO = new UsersVO();
 		if (usernameIsExist) {
 			// 1.1 登录
-			userResult = userService.queryUserForLogin(user.getUsername(), 
-									MD5Utils.getMD5Str(user.getPassword()));
+			userResult = userService.queryUserForLogin(user.getUsername(),
+												 MD5Utils.getMD5Str(user.getPassword()));
+			
+			
+			// System.out.println(user.getUsername());
+			// System.out.println(user.getPassword());
+			// System.out.println(JsonUtils.objectToJson(userResult));
 			if (userResult == null) {
 				return ResponseJSON.errorMsg("用户名或密码不正确..."); 
 			}
@@ -126,6 +131,9 @@ public class UserController {
 		response.addCookie(cookie);
 
 		BeanUtils.copyProperties(userResult, userVO);
+
+
+		System.out.println("136"+JsonUtils.objectToJson(userVO));
 		return ResponseJSON.ok(userVO);
 
 	}
@@ -186,8 +194,8 @@ public class UserController {
         
         Users user = new Users();
 		user.setId(userBO.getUserId());
-		user.setNickName(userBO.getNickname());
-		
+		user.setNickName(userBO.getNickName());
+		System.out.println("UserCon 198"+JsonUtils.objectToJson(user));
 		Users result = userService.updateUserInfo(user);
 		
 		return ResponseJSON.ok(result);
