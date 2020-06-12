@@ -146,7 +146,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/uploadFaceBase64")
-	public ResponseJSON uploadFaceBase64(HttpServletRequest request,@RequestBody UsersBO userBO) throws Exception {
+	public ResponseJSON uploadFaceBase64(@RequestBody UsersBO userBO) throws Exception {
 		// 获取前端传过来的base64字符串, 然后转换为文件对象再上传
 		String base64Data = userBO.getFaceData();
 		String userFacePath = "D:\\image\\" + userBO.getUserId() + "userface64.png";
@@ -182,7 +182,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/setNickname")
-	public ResponseJSON setNickname(HttpServletRequest request,@RequestBody UsersBO userBO) throws Exception {
+	public ResponseJSON setNickname(@RequestBody UsersBO userBO) throws Exception {
         
         Users user = new Users();
 		user.setId(userBO.getUserId());
@@ -228,7 +228,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/addFriendRequest")
-	public ResponseJSON addFriendRequest(HttpServletRequest request,String myUserId, String friendUsername)
+	public ResponseJSON addFriendRequest(String myUserId, String friendUsername)
 			throws Exception {
 		
 		// 0. 判断 myUserId friendUsername 不能为空
@@ -256,7 +256,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/queryFriendRequests")
-	public ResponseJSON queryFriendRequests(HttpServletRequest request,String userId) {
+	public ResponseJSON queryFriendRequests(String userId) {
 		
 		// 0. 判断不能为空
 		if (StringUtils.isBlank(userId)) {
@@ -273,7 +273,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/operatorFriendRequest")
-	public ResponseJSON operatorFriendRequest(HttpServletRequest request,String acceptUserId, String sendUserId,
+	public ResponseJSON operatorFriendRequest(String acceptUserId, String sendUserId,
 												Integer operType) {
 		
 		// 0. acceptUserId sendUserId operType 判断不能为空
@@ -308,7 +308,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/myFriends")
-	public ResponseJSON myFriends(HttpServletRequest request,String userId) {
+	public ResponseJSON myFriends(String userId) {
 		// 0. userId 判断不能为空
 		if (StringUtils.isBlank(userId)) {
 			return ResponseJSON.errorMsg("");
@@ -326,7 +326,7 @@ public class UserController {
 	 */
 	@LoginRequired
 	@PostMapping("/getUnReadMsgList")
-	public ResponseJSON getUnReadMsgList(HttpServletRequest request,String acceptUserId) {
+	public ResponseJSON getUnReadMsgList(String acceptUserId) {
 		// 0. userId 判断不能为空
 		if (StringUtils.isBlank(acceptUserId)) {
 			return ResponseJSON.errorMsg("");
