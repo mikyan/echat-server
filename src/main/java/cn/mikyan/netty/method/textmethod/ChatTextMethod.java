@@ -41,6 +41,7 @@ public class ChatTextMethod implements TextMethod {
 		String msgId = userService.saveMsg(chatMsg);
 		chatMsg.setMsgId(msgId);
 
+		//System.out.println(JsonUtils.objectToJson(chatMsg));
 		DataContent dataContentMsg = new DataContent();
 		dataContentMsg.setChatMsg(chatMsg);
 
