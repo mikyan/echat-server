@@ -7,7 +7,7 @@
 			
 		// 	// 测试
 		// 	for (Channel c : users) {
-		// 		System.out.println(c.id().asLongText());
+		// 		// system.out.println(c.id().asLongText());
 		// 	}
 		// 	UserChannelRel.output();
 		// } else if (action == MsgActionEnum.CHAT.type) {
@@ -64,7 +64,7 @@
 		// 		}
 		// 	}
 			
-		// 	System.out.println(msgIdList.toString());
+		// 	// system.out.println(msgIdList.toString());
 			
 		// 	if (msgIdList != null && !msgIdList.isEmpty() && msgIdList.size() > 0) {
 		// 		// 批量签收
@@ -73,5 +73,5 @@
 			
 		// } else if (action == MsgActionEnum.KEEPALIVE.type) {
 		// 	//  2.4  心跳类型的消息
-		// 	System.out.println("收到来自channel为[" + currentChannel + "]的心跳包...");
+		// 	// system.out.println("收到来自channel为[" + currentChannel + "]的心跳包...");
 		// }

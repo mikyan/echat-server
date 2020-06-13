@@ -36,9 +36,9 @@ public class ConnectTextMethod implements TextMethod {
         UserChannelRel.put(senderId, currentChannel);
 
         // 测试
-        for (Channel c : ChatHandler.users) {
-            System.out.println(c.id().asLongText());
-        }
+        // for (Channel c : ChatHandler.users) {
+        //     System.out.println(c.id().asLongText());
+        // }
         UserChannelRel.output();
     }
 

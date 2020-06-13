@@ -133,7 +133,7 @@ public class UserServiceImpL implements UserService {
     @Override
     public Integer preconditionSearchFriends(String myUserId, String friendUsername) {
     	Users user = queryUserInfoByUsername(friendUsername);
-		System.out.println(friendUsername);
+		// system.out.println(friendUsername);
 		// 1. 搜索的用户如果不存在，返回[无此用户]
 		if (user == null) {
 			return SearchFriendsStatusEnum.NOT_EXIST.status;

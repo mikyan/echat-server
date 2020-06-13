@@ -53,12 +53,12 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
             if(userId==null){
                 userId = request.getParameter("acceptUserId");
             }
-            System.out.println(userId);
+            // system.out.println(userId);
 
 
             if(cookies==null){
                
-                System.out.println("没有cookie");
+                // system.out.println("没有cookie");
                 return false;
                 
             }else{

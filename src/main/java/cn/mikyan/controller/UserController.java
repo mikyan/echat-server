@@ -87,9 +87,9 @@ public class UserController {
 												 MD5Utils.getMD5Str(user.getPassword()));
 			
 			
-			// System.out.println(user.getUsername());
-			// System.out.println(user.getPassword());
-			// System.out.println(JsonUtils.objectToJson(userResult));
+			// // system.out.println(user.getUsername());
+			// // system.out.println(user.getPassword());
+			// // system.out.println(JsonUtils.objectToJson(userResult));
 			if (userResult == null) {
 				return ResponseJSON.errorMsg("用户名或密码不正确..."); 
 			}
@@ -133,7 +133,7 @@ public class UserController {
 		BeanUtils.copyProperties(userResult, userVO);
 
 
-		System.out.println("136"+JsonUtils.objectToJson(userVO));
+		// system.out.println("136"+JsonUtils.objectToJson(userVO));
 		return ResponseJSON.ok(userVO);
 
 	}
@@ -163,7 +163,7 @@ public class UserController {
 		// 上传文件到fastdfs
 		MultipartFile faceFile = FileUtils.fileToMultipart(userFacePath);
 		String url = fastDFSClient.uploadBase64(faceFile);
-		System.out.println(url);
+		// system.out.println(url);
 		
 //		"dhawuidhwaiuh3u89u98432.png"
 //		"dhawuidhwaiuh3u89u98432_80x80.png"
@@ -195,7 +195,7 @@ public class UserController {
         Users user = new Users();
 		user.setId(userBO.getUserId());
 		user.setNickName(userBO.getNickName());
-		System.out.println("UserCon 198"+JsonUtils.objectToJson(user));
+		// system.out.println("UserCon 198"+JsonUtils.objectToJson(user));
 		Users result = userService.updateUserInfo(user);
 		
 		return ResponseJSON.ok(result);
@@ -324,7 +324,7 @@ public class UserController {
 		
 		// 1. 数据库查询好友列表
 		List<MyFriendsVO> myFirends = userService.queryMyFriends(userId);
-		System.out.println(JsonUtils.objectToJson(myFirends));
+		// system.out.println(JsonUtils.objectToJson(myFirends));
 		return ResponseJSON.ok(myFirends);
 	}
 	

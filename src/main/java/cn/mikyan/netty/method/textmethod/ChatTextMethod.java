@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.mikyan.SpringUtil;
+import cn.mikyan.enums.MsgActionEnum;
 import cn.mikyan.netty.ChatHandler;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -40,11 +41,11 @@ public class ChatTextMethod implements TextMethod {
 		UserService userService = (UserService) SpringUtil.getBean("userServiceImpL");
 		String msgId = userService.saveMsg(chatMsg);
 		chatMsg.setMsgId(msgId);
-
+		chatMsg.setType(MsgActionEnum.CHAT.type);
 		//System.out.println(JsonUtils.objectToJson(chatMsg));
 		DataContent dataContentMsg = new DataContent();
 		dataContentMsg.setChatMsg(chatMsg);
-
+		dataContent.setAction(MsgActionEnum.CHAT.type);
 		// 发送消息
 		// 从全局用户Channel关系中获取接受方的channel
 		Channel receiverChannel = UserChannelRel.get(receiverId);

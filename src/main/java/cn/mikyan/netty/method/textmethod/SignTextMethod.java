@@ -41,7 +41,7 @@ public class SignTextMethod implements TextMethod {
 			}
 		}
 
-		System.out.println(msgIdList.toString());
+		// system.out.println(msgIdList.toString());
 
 		if (msgIdList != null && !msgIdList.isEmpty() && msgIdList.size() > 0) {
 			// 批量签收

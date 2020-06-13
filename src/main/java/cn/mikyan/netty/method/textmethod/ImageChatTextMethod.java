@@ -1,6 +1,7 @@
 package cn.mikyan.netty.method.textmethod;
 
 import cn.mikyan.SpringUtil;
+import cn.mikyan.enums.MsgActionEnum;
 import cn.mikyan.netty.ChatHandler;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -52,14 +53,14 @@ public class ImageChatTextMethod implements TextMethod {
 
 		// 获取前端传过来的base64字符串, 然后转换为文件对象再上传
 		String base64Data = msgText;
-		String imagetempPath = "D:\\image\\" + senderId + receiverId;
-
+		String imagetempPath = "D:\\image\\" + senderId + receiverId+".png";
+		//System.out.println(msgText);
 		FileUtils.base64ToFile(imagetempPath, base64Data);
 		
 		// 上传文件到fastdfs
 		MultipartFile faceFile = FileUtils.fileToMultipart(imagetempPath);
 		String url = fastDFSClient.uploadBase64(faceFile);
-		System.out.println(url);
+		// system.out.println(url);
 		
         
 		// 保存消息到数据库，并且标记为 未签收
@@ -68,10 +69,11 @@ public class ImageChatTextMethod implements TextMethod {
 
 		chatMsg.setMsgId(msgId);
         chatMsg.setMsg(url);
-        
+		chatMsg.setType(MsgActionEnum.CHAT_IMAGE.type);
+		
 		DataContent dataContentMsg = new DataContent();
 		dataContentMsg.setChatMsg(chatMsg);
-
+		dataContent.setAction(MsgActionEnum.CHAT_IMAGE.type);
 		// 发送消息
 		// 从全局用户Channel关系中获取接受方的channel
 		Channel receiverChannel = UserChannelRel.get(receiverId);
