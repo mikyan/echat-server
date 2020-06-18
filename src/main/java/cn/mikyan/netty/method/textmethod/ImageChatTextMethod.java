@@ -64,16 +64,19 @@ public class ImageChatTextMethod implements TextMethod {
 		
         
 		// 保存消息到数据库，并且标记为 未签收
+		chatMsg.setMsg(url);
+		chatMsg.setType(MsgActionEnum.CHAT_IMAGE.type);
+
         UserService userService = (UserService) SpringUtil.getBean("userServiceImpL");
         String msgId = userService.saveImageMsg(chatMsg);
 
 		chatMsg.setMsgId(msgId);
-        chatMsg.setMsg(url);
-		chatMsg.setType(MsgActionEnum.CHAT_IMAGE.type);
+        
+		
 		
 		DataContent dataContentMsg = new DataContent();
 		dataContentMsg.setChatMsg(chatMsg);
-		dataContent.setAction(MsgActionEnum.CHAT_IMAGE.type);
+		dataContentMsg.setAction(MsgActionEnum.CHAT_IMAGE.type);
 		// 发送消息
 		// 从全局用户Channel关系中获取接受方的channel
 		Channel receiverChannel = UserChannelRel.get(receiverId);

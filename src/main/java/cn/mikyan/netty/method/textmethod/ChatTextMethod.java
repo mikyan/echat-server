@@ -38,14 +38,15 @@ public class ChatTextMethod implements TextMethod {
 		String senderId = chatMsg.getSenderId();
 
 		// 保存消息到数据库，并且标记为 未签收
+		chatMsg.setType(MsgActionEnum.CHAT.type);
 		UserService userService = (UserService) SpringUtil.getBean("userServiceImpL");
 		String msgId = userService.saveMsg(chatMsg);
 		chatMsg.setMsgId(msgId);
-		chatMsg.setType(MsgActionEnum.CHAT.type);
+		
 		//System.out.println(JsonUtils.objectToJson(chatMsg));
 		DataContent dataContentMsg = new DataContent();
 		dataContentMsg.setChatMsg(chatMsg);
-		dataContent.setAction(MsgActionEnum.CHAT.type);
+		dataContentMsg.setAction(MsgActionEnum.CHAT.type);
 		// 发送消息
 		// 从全局用户Channel关系中获取接受方的channel
 		Channel receiverChannel = UserChannelRel.get(receiverId);
